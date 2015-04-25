@@ -35,7 +35,6 @@ function traitement(body){
             location : item.geometry.location,
             vicinity : item.vicinity
         };
-        pizzeria.website = item.website || null;
         pizzeria.rating = item.rating || null;
 
         var details_param = queryString.stringify({
@@ -46,6 +45,7 @@ function traitement(body){
             if (!error && response.statusCode == 200){
                 body = JSON.parse(body);
                 pizzeria.opening_hours = body.result.opening_hours;
+                pizzeria.website = body.result.website || null;
                 var obj_pizza = {};
                 myFirebaseRef.child('pizzeria/'+item.place_id).set(pizzeria,function(error){
                     if(error){
