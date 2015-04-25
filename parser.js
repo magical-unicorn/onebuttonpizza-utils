@@ -34,7 +34,8 @@ function traitement(body){
          pizzeria.adress = {
             location : item.geometry.location,
             vicinity : item.vicinity
-        };
+		 };
+		 pizzeria.website = item.website;
         pizzeria.rating = item.rating || null;
 
         var details_param = queryString.stringify({
