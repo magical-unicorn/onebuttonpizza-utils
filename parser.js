@@ -23,6 +23,7 @@ request(url+'?'+params,function(error, response, body){
     if (!error && response.statusCode == 200){
         body = JSON.parse(body);
         traitement(body);
+        store_pizza(body);
     }
 });
 
@@ -36,7 +37,17 @@ function traitement(body){
             vicinity : item.vicinity
         };
         pizzeria.rating = item.rating || null;
-
+        pizzeria.prices = {
+            "regina" : 900,
+            "campagnarde" : 900,
+            "4 fromage" : 1050,
+            "margaritta" : 700,
+            "végétarienne" : 950,
+            "4 saisons" : 1000,
+            "chorizo" : 950,
+            "poulet" : 850,
+            "bolognaise": 950
+        };
         var details_param = queryString.stringify({
             placeid : item.place_id,
             key : google_api_key
@@ -60,10 +71,10 @@ function traitement(body){
     },function(err){
         if (err) {
             console.log(err);
-        }else{
-            console.log('Importation terminée 👍');
         }
     });
+}
 
+function store_pizza(body){
 
 }
